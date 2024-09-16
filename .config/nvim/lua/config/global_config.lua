@@ -32,7 +32,15 @@ vim.o.timeoutlen = 300
 -- Set completeopt to have a better completion experience
 vim.o.completeopt = "menuone,noselect"
 
--- NOTE: You should make sure your terminal supports this
 vim.o.termguicolors = true
+vim.o.tabstop = 4
 
-vim.o.tabstop=4
+-- hide command line at the bottom, unless I'm entering a command
+vim.o.cmdheight = 0
+
+-- Highlight yanked text
+vim.api.nvim_create_autocmd("TextYankPost", {
+	callback = function()
+		vim.highlight.on_yank({ higroup = "Substitute", timeout = 300 })
+	end,
+})
