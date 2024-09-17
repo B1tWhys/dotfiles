@@ -17,9 +17,9 @@ vim.keymap.set("n", "H", ":tabn<CR>")
 vim.keymap.set("n", "L", ":tabp<CR>")
 
 -- Toggle LSP warnings/errors
-vim.keymap.set("n", "<leader>stfu", function()
+vim.api.nvim_create_user_command("Stfu", function()
 	vim.diagnostic.enable(not vim.diagnostic.is_enabled())
-end)
+end, {})
 
 -- Run formatter
 vim.keymap.set("n", "<leader>f", ":Format<CR>", { silent = true })
@@ -50,3 +50,9 @@ vim.keymap.set("n", "tn", ":LualineRenameTab ")
 
 -- Undo tree
 vim.keymap.set("n", "<leader>u", vim.cmd.UndotreeToggle)
+
+-- DAP commands
+local dap = require("dap")
+vim.keymap.set("n", "\\", dap.toggle_breakpoint)
+vim.keymap.set("n", "<leader>dr", dap.continue)
+vim.keymap.set("n", "<C-.>", dap.terminate)
