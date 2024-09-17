@@ -16,6 +16,9 @@ return {
 				vim.keymap.set("n", "h", api.node.open.horizontal, opts("Open in horizontal split"))
 				vim.keymap.set("n", "v", api.node.open.vertical, opts("Open in vertical split"))
 				vim.keymap.del("n", "s", { buffer = bufnr })
+				vim.keymap.set("n", "dd", api.fs.remove)
+				vim.keymap.set("n", "rn", api.fs.rename)
+				vim.keymap.set("n", "<C-n>", api.fs.create)
 			end
 
 			require("nvim-tree").setup({ on_attach = on_attach })

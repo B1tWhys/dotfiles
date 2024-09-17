@@ -3,6 +3,8 @@ return {
 		"mfussenegger/nvim-dap",
 		config = function()
 			local dap = require("dap")
+
+			-- Go config
 			dap.adapters.delve = {
 				type = "server",
 				port = "${port}",
@@ -22,43 +24,72 @@ return {
 					request = "launch",
 					program = "${file}",
 				},
-				{
-					type = "delve",
-					name = "Debug test", -- configuration for debugging test files
-					request = "launch",
-					mode = "test",
-					program = "${file}",
-				},
-				-- works with go.mod packages and sub packages
-				{
-					type = "delve",
-					name = "Debug test (go.mod)",
-					request = "launch",
-					mode = "test",
-					program = "./${relativeFileDirname}",
-				},
+				-- {
+				-- 	type = "delve",
+				-- 	name = "Debug test", -- configuration for debugging test files
+				-- 	request = "launch",
+				-- 	mode = "test",
+				-- 	program = "${file}",
+				-- },
+				-- -- works with go.mod packages and sub packages
+				-- {
+				-- 	type = "delve",
+				-- 	name = "Debug test (go.mod)",
+				-- 	request = "launch",
+				-- 	mode = "test",
+				-- 	program = "./${relativeFileDirname}",
+				-- },
 			}
-			-- 	dap.adapters.go = {
-			-- 		type = "executable",
-			-- 		command = "node",
-			-- 		args = { os.getenv("HOME") .. "/dev/golang/vscode-go/extension/dist/debugAdapter.js" },
-			-- 	}
-			-- 	dap.configurations.go = {
-			-- 		{
-			-- 			type = "go",
-			-- 			name = "Debug",
-			-- 			request = "launch",
-			-- 			showLog = false,
-			-- 			program = "${file}",
-			-- 			dlvToolPath = vim.fn.exepath("dlv"), -- Adjust to where delve is installed
-			-- 		},
-			-- 	}
 		end,
 		build = { ":helptags ALL" },
 	},
 	{
 		"rcarriga/nvim-dap-ui",
 		dependencies = { "mfussenegger/nvim-dap", "nvim-neotest/nvim-nio" },
-		opts = {},
+		opts = {
+			controls = {
+				element = "stacks",
+			},
+			layouts = {
+				{ -- bottom (non-dbg)
+					elements = {
+						{
+							id = "repl",
+							size = 1.0,
+						},
+					},
+					position = "bottom",
+					size = 10,
+				},
+				{ -- bottom (dbg)
+					elements = {
+						{
+							id = "repl",
+							size = 1.0,
+						},
+					},
+					position = "bottom",
+					size = 10,
+				},
+				{ -- right (dbg)
+					elements = {
+						{
+							id = "watches",
+							size = 0.33,
+						},
+						{
+							id = "scopes",
+							size = 0.33,
+						},
+						{
+							id = "stacks",
+							size = 0.33,
+						},
+					},
+					position = "right",
+					size = 40,
+				},
+			},
+		},
 	},
 }

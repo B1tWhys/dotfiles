@@ -6,6 +6,9 @@ return {
 				filetype = {
 					lua = require("formatter.filetypes.lua").stylua,
 					python = require("formatter.filetypes.python").black,
+					go = require("formatter.filetypes.go").goimports,
+					javascript = require("formatter.filetypes.javascript").prettier,
+					html = require("formatter.filetypes.html").prettier,
 				},
 			})
 			vim.api.nvim_create_autocmd({ "BufWritePost" }, { command = "FormatWrite" })
