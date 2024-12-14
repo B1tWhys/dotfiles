@@ -54,30 +54,30 @@ vim.keymap.set("n", "<leader>u", vim.cmd.UndotreeToggle)
 -- DAP commands
 local dap, dapui = require("dap"), require("dapui")
 vim.keymap.set("n", "\\", dap.toggle_breakpoint)
-vim.keymap.set("n", "<leader>dc", dap.continue)
+vim.keymap.set("n", "<leader>dc", dap.continue, { desc = "dbg: continue" })
 vim.keymap.set("n", "<C-.>", dap.terminate)
-vim.keymap.set("n", "go", dap.step_out)
-vim.keymap.set("n", "gi", dap.step_into)
-vim.keymap.set("n", "gn", dap.step_over)
-vim.keymap.set("n", "gc", dap.continue)
+vim.keymap.set("n", "go", dap.step_out, { desc = "dbg: Step Out" })
+vim.keymap.set("n", "gi", dap.step_into, { desc = "dbg: Step in" })
+vim.keymap.set("n", "gn", dap.step_over, { desc = "dbg: Step over" })
+vim.keymap.set("n", "gc", dap.continue, { desc = "dbg: Continue" })
 vim.keymap.set("n", "gd", function()
 	dapui.close(1)
 	dapui.open(2)
 	dapui.open(3)
 	dap.continue()
-end)
+end, { desc = "dbg: Open debug pannel" })
 
 vim.keymap.set("n", "<leader>dd", function() -- open debug UI
 	dapui.close(1)
 	dapui.toggle(2)
 	dapui.toggle(3)
-end)
+end, { desc = "dbg: Open debug pannel" })
 
 vim.keymap.set("n", "<leader>dr", function() -- open just the console
 	dapui.close(2)
 	dapui.close(3)
 	dapui.toggle(1)
-end)
+end, { desc = "dbg: Open just the run pannel" })
 
 vim.keymap.set("n", "<leader>db", function() -- Float the breakpoints menu
 	dapui.float_element("breakpoints", {
@@ -86,4 +86,4 @@ vim.keymap.set("n", "<leader>db", function() -- Float the breakpoints menu
 		enter = true,
 		position = "center",
 	})
-end)
+end, { desc = "dbg: Show breakpoints popup" })

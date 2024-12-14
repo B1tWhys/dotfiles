@@ -9,6 +9,7 @@ return {
 					go = require("formatter.filetypes.go").goimports,
 					javascript = require("formatter.filetypes.javascript").prettier,
 					html = require("formatter.filetypes.html").prettier,
+					sh = require("formatter.filetypes.sh").shfmt,
 				},
 			})
 			vim.api.nvim_create_autocmd({ "BufWritePost" }, { command = "FormatWrite" })
