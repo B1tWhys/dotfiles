@@ -1,25 +1,27 @@
+# shellcheck shell=bash
+
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
 
 # If there is a default location, cd to it
 defaultLocation='/tmp/defaultTerminalLocation'
 if [ -s $defaultLocation ]; then
-    if [ -d `cat $defaultLocation` ]; then
-        cd `cat $defaultLocation`;
+    if [ -d "$(cat $defaultLocation)" ]; then
+        cd "$(cat $defaultLocation)" || return
     fi
 fi
 
+alias dtd="pwd > /tmp/defaultTerminalLocation"
 g() {
-    if [ -s $defaultLocation ]; then
-      if [ -d `cat $defaultLocation` ];
-        then
-          cd $(cat /tmp/defaultTerminalLocation);
-      fi;
+    if [ -s "$defaultLocation" ]; then
+        if [ -d "$(cat "$defaultLocation")" ]; then
+            cd "$(cat /tmp/defaultTerminalLocation)" || return
+        fi
     fi
 }
 
-
-if [ $(whoami) == 'root' ]; then
+# shellcheck disable=SC2025
+if [ "$(whoami)" == 'root' ]; then
     PS1="\e[95m!\! \e[32m[\T] \e[91m$(whoami)\e[36m@\h \e[31m\w\e[39m\n# "
 else
     PS1="\e[95m!\! \e[32m[\T] \e[36m$(whoami)@\h \e[31m\w\e[39m\n# "
@@ -28,10 +30,15 @@ fi
 set -o vi
 shopt -s cdspell
 
+alias l="ls"
 alias ls="ls -F"
 alias ll="ls -lh"
-alias l="ls"
-alias dtd="pwd > /tmp/defaultTerminalLocation"
+alias la="ls -A"
+alias lal="ls -Al"
+lt() {
+    # shellcheck disable=SC2012
+    ls -t "$@" | head
+}
 alias grep="grep --color=auto"
 alias egrep="egrep --color=auto"
 alias fgrep="fgrep --color=auto"
@@ -90,16 +97,17 @@ export LESS_TERMCAP_so=$'\e[01;33m'
 export LESS_TERMCAP_ue=$'\e[0m'
 export LESS_TERMCAP_us=$'\e[1;4;31m'
 
-lt() {
-    ls -t $1 | head
-}
-
-if [[ -d "~/.bash_init_scripts" ]]; then
+if [[ -d "$HOME/.bash_init_scripts" ]]; then
     for f in ~/.bash_setup_scripts/*; do
-        source $f
+        # shellcheck disable=SC1090
+        source "$f"
     done
 fi
-. "$HOME/.cargo/env"
+
+if [[ -f "$HOME/.cargo/env" ]]; then
+    # shellcheck disable=SC1091
+    . "$HOME/.cargo/env"
+fi
 
 # Created by `pipx` on 2024-07-10 05:22:21
 export PATH="$PATH:/Users/Skyler/.local/bin"
