@@ -72,6 +72,7 @@ alias gpull="git pull"
 alias gc="git commit"
 alias ga="git add"
 alias gb="git branch"
+alias gbc="git branch --show-current"
 alias gch="git checkout"
 alias gl="git log --graph"
 alias glo="git log --oneline --graph"
@@ -86,8 +87,14 @@ alias top="htop"
 alias vi="nvim"
 alias imasscan="sudo masscan --rate 8000 -p T:1-65535,U:1-65535"
 alias inmap="nmap -sC -sV -oN nmap.out -T4"
-alias paste="pbpaste"
-alias clip="pbcopy"
+
+if command -v pbcopy &>/dev/null; then
+    alias clip="pbcopy"
+    alias paste="pbpaste"
+elif command -v xclip &>/dev/null; then
+    alias clip="xclip -i -selection clipboard"
+    alias paste="xclip -o -selection clipboard"
+fi
 
 export LESS_TERMCAP_mb=$'\e[1;32m'
 export LESS_TERMCAP_md=$'\e[1;32m'
