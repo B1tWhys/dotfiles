@@ -13,8 +13,8 @@ vim.keymap.set("n", "<C-j>", ":wincmd j\n")
 vim.keymap.set("n", "<C-l>", ":wincmd l\n")
 vim.keymap.set("n", "<C-h>", ":wincmd h\n")
 
-vim.keymap.set("n", "H", ":tabn<CR>")
-vim.keymap.set("n", "L", ":tabp<CR>")
+vim.keymap.set("n", "H", ":tabp<CR>")
+vim.keymap.set("n", "L", ":tabn<CR>")
 
 -- Toggle LSP warnings/errors
 vim.api.nvim_create_user_command("Stfu", function()
@@ -52,7 +52,7 @@ vim.keymap.set("n", "tn", ":LualineRenameTab ")
 vim.keymap.set("n", "<leader>u", vim.cmd.UndotreeToggle)
 
 -- DAP commands
-local dap, dapui = require("dap"), require("dapui")
+local dap, dapui, dapPython = require("dap"), require("dapui"), require("dap-python")
 vim.keymap.set("n", "\\", dap.toggle_breakpoint)
 vim.keymap.set("n", "<leader>dc", dap.continue, { desc = "dbg: continue" })
 vim.keymap.set("n", "<C-.>", dap.terminate)
@@ -60,12 +60,23 @@ vim.keymap.set("n", "go", dap.step_out, { desc = "dbg: Step Out" })
 vim.keymap.set("n", "gi", dap.step_into, { desc = "dbg: Step in" })
 vim.keymap.set("n", "gn", dap.step_over, { desc = "dbg: Step over" })
 vim.keymap.set("n", "gc", dap.continue, { desc = "dbg: Continue" })
+
+-- Experimental: Use arrow keys for debugging
+vim.keymap.set("n", "<Down>", dap.step_over, { desc = "Step over" })
+vim.keymap.set("n", "<Right>", dap.step_into, { desc = "Step in" })
+vim.keymap.set("n", "<Left>", dap.step_out, { desc = "Step out" })
+vim.keymap.set("n", "<Up>", dap.run_to_cursor, { desc = "Run to cursor" })
+
+vim.keymap.set("n", "gt", dapPython.test_method, { desc = "dbg: Run test above cursor" })
 vim.keymap.set("n", "gd", function()
+	-- dapui.close(1)
+	-- dapui.open(2)
+	-- dapui.open(3)
+	-- dap.continue()
 	dapui.close(1)
-	dapui.open(2)
-	dapui.open(3)
-	dap.continue()
-end, { desc = "dbg: Open debug pannel" })
+	dapui.toggle(2)
+	dapui.toggle(3)
+end, { desc = "dbg: Toggle debug pannels" })
 
 vim.keymap.set("n", "<leader>dd", function() -- open debug UI
 	dapui.close(1)
