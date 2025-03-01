@@ -104,12 +104,14 @@ export LESS_TERMCAP_so=$'\e[01;33m'
 export LESS_TERMCAP_ue=$'\e[0m'
 export LESS_TERMCAP_us=$'\e[1;4;31m'
 
+export EDITOR='nvim'
+
 if command -v nvim &>/dev/null; then
     export GIT_EDITOR=nvim
 fi
 
 if [[ -d "$HOME/.bash_init_scripts" ]]; then
-    for f in ~/.bash_setup_scripts/*; do
+    for f in ~/.bash_init_scripts/*; do
         # shellcheck disable=SC1090
         source "$f"
     done
