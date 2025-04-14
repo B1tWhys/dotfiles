@@ -1,0 +1,63 @@
+{
+  "workbench.startupEditor": "none",
+  "python.jediEnabled": false,
+  "python.pythonPath": "/usr/local/bin/python3",
+  "python.linting.pylintEnabled": true,
+  "editor.lineNumbers": "relative",
+  "files.autoSave": "afterDelay",
+  "editor.suggestSelection": "first",
+  "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
+  "latex-workshop.view.pdf.viewer": "tab",
+  "files.autoSaveDelay": 500,
+  "editor.wordWrap": "on",
+  "explorer.confirmDragAndDrop": false,
+  "editor.minimap.enabled": false,
+  "explorer.confirmDelete": false,
+  "editor.formatOnSave": true,
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "editor.formatOnType": true,
+  "[vue]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[jsonc]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "svelte.enable-ts-plugin": true,
+  "svelte.plugin.svelte.note-new-transformation": false,
+  "liveServer.settings.donotShowInfoMsg": true,
+  "[svelte]": {
+    "editor.defaultFormatter": "svelte.svelte-vscode"
+  },
+  "[typescript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "vite.showTerminal": true,
+  "editor.tabSize": 2,
+  "workbench.commandPalette.history": 5000,
+  "window.zoomLevel": 1,
+  "javascript.updateImportsOnFileMove.enabled": "always",
+  "cmake.configureOnOpen": true,
+  "cmake.configureOnEdit": false,
+  "notebook.output.scrolling": true,
+  "git.openRepositoryInParentFolders": "never",
+  "redhat.telemetry.enabled": false,
+  "prettier.configPath": ".prettierrc",
+  "[html]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[javascriptreact]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[typescriptreact]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "astro.content-intellisense": true,
+  "cSpell.userWords": ["Skyler", "skylerarnold"],
+  "supermaven.enable": {
+    "*": false
+  },
+  "workbench.sideBar.location": "right",
+  "workbench.colorTheme": "GitHub Dark Dimmed"
+}
