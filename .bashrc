@@ -79,6 +79,7 @@ alias glo="git log --oneline --graph"
 alias gla="git log --graph --all"
 alias gloa="git log --oneline --graph --all"
 alias glav="git log --graph --all"
+alias gwatch='watch -n .5 -c "git log --oneline --all --graph --decorate=short --color=always"'
 alias gsta="git stash"
 alias sctl="sudo systemctl"
 alias jctl="sudo journalctl"
