@@ -44,7 +44,7 @@ vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename)
 -- Tabs
 vim.keymap.set("n", "<Tab>", ":tabnext<CR>", { silent = true })
 vim.keymap.set("n", "<S-Tab>", ":tabprevious<CR>", { silent = true })
-vim.keymap.set("n", "<C-t>", ":tabnew<CR>", { silent = true })
+vim.keymap.set("n", "<leader>t", ":tabnew<CR>", { silent = true })
 vim.keymap.set("n", "<C-x>", ":tabclose<CR>", { silent = true })
 vim.keymap.set("n", "tn", ":LualineRenameTab ")
 

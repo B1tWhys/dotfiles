@@ -3,7 +3,7 @@ return {
 		"nvim-tree/nvim-tree.lua",
 		config = function()
 			local api = require("nvim-tree.api")
-			local toggleKeybind = "<leader>t"
+			local toggleKeybind = "<C-t>"
 			local function my_on_attach(bufnr)
 				api.config.mappings.default_on_attach(bufnr)
 
