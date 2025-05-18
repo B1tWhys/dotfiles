@@ -44,3 +44,10 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 		vim.highlight.on_yank({ higroup = "Substitute", timeout = 300 })
 	end,
 })
+
+-- Show diagnostics in a floating window on hover
+vim.api.nvim_create_autocmd("CursorHold", {
+	callback = function()
+		vim.diagnostic.open_float(nil, { focusable = false })
+	end,
+})
