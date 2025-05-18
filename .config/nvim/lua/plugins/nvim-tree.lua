@@ -22,7 +22,7 @@ return {
 				vim.keymap.set("n", "<C-n>", api.fs.create, baselineOpts)
 			end
 
-			require("nvim-tree").setup({ on_attach = my_on_attach })
+			require("nvim-tree").setup({ on_attach = my_on_attach, update_focused_file = { enable = true } })
 
 			vim.keymap.set("n", toggleKeybind, api.tree.focus)
 		end,
