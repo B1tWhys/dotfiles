@@ -21,10 +21,14 @@ vim.keymap.set("n", "<leader>f", ":Format<CR>", { silent = true })
 vim.keymap.set("n", "<leader>F", ":FormatWrite<CR>", { silent = true })
 
 -- Telescope
-vim.keymap.set("n", "<leader><leader>", ":Telescope find_files<CR>")
-vim.keymap.set("n", "<leader>f?", ":Telescope keymaps<CR>")
-vim.keymap.set("n", "<leader>fh", ":Telescope help_tags<CR>")
-vim.keymap.set("n", "<leader>fb", ":Telescope buffers<CR>")
+
+local tsBuiltins = require("telescope.builtin")
+vim.keymap.set("n", "<leader><leader>", tsBuiltins.find_files)
+vim.keymap.set("n", "<leader>f?", tsBuiltins.keymaps)
+vim.keymap.set("n", "<C-p>", tsBuiltins.commands)
+vim.keymap.set("n", "<leader>fh", tsBuiltins.help_tags)
+vim.keymap.set("n", "<leader>fb", tsBuiltins.buffers)
+vim.keymap.set("n", "<leader>ff", tsBuiltins.live_grep)
 
 -- Package mgmt
 vim.keymap.set("n", "<leader>M", ":Mason\n", { desc = "Open Mason" })
