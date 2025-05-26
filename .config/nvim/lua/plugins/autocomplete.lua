@@ -28,13 +28,13 @@ return {
 					documentation = cmp.config.window.bordered(),
 				},
 				mapping = cmp.mapping.preset.insert({
-					["<C-Space>"] = function()
-						if cmp.visible() then
-							cmp.mapping.open_docs()
-						else
-							cmp.mapping.complete()
-						end
-					end,
+					-- ["<C-Space>"] = function() -- I think this is now handled by the LSP
+					-- 	if cmp.visible() then
+					-- 		cmp.mapping.open_docs()
+					-- 	else
+					-- 		cmp.mapping.complete()
+					-- 	end
+					-- end,
 					["<CR>"] = cmp.mapping.confirm({ select = true }),
 					["<Tab>"] = cmp.mapping.select_next_item(),
 					["<S-Tab>"] = cmp.mapping.select_prev_item(),

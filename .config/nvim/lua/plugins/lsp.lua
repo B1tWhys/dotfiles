@@ -4,7 +4,6 @@ return {
 		config = function(opts)
 			local mason = require("mason")
 			mason.setup(opts)
-			vim.keymap.set("n", "<leader>M", ":Mason\n")
 		end,
 	},
 	{ "neovim/nvim-lspconfig" },

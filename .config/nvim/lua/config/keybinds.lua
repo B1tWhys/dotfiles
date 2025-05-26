@@ -16,11 +16,6 @@ vim.keymap.set("n", "<C-h>", ":wincmd h\n")
 vim.keymap.set("n", "H", ":tabp<CR>")
 vim.keymap.set("n", "L", ":tabn<CR>")
 
--- Toggle LSP warnings/errors
-vim.api.nvim_create_user_command("Stfu", function()
-	vim.diagnostic.enable(not vim.diagnostic.is_enabled())
-end, {})
-
 -- Run formatter
 vim.keymap.set("n", "<leader>f", ":Format<CR>", { silent = true })
 vim.keymap.set("n", "<leader>F", ":FormatWrite<CR>", { silent = true })
@@ -30,6 +25,25 @@ vim.keymap.set("n", "<leader><leader>", ":Telescope find_files<CR>")
 vim.keymap.set("n", "<leader>f?", ":Telescope keymaps<CR>")
 vim.keymap.set("n", "<leader>fh", ":Telescope help_tags<CR>")
 vim.keymap.set("n", "<leader>fb", ":Telescope buffers<CR>")
+
+-- Package mgmt
+vim.keymap.set("n", "<leader>M", ":Mason\n", { desc = "Open Mason" })
+vim.keymap.set("n", "<leader>L", ":Lazy\n", { desc = "Open Lazy" })
+
+-- LSP
+vim.keymap.set("n", "gd", vim.lsp.buf.definition, { desc = "Jump to symbol definition" })
+vim.keymap.set("n", "<C-b>", vim.lsp.buf.definition, { desc = "Jump to symbol definition" })
+for _, c in ipairs({ "i", "n" }) do
+	vim.keymap.set(c, "<C-Space>", function()
+		-- vim.lsp.buf.signature_help({ silent = true })
+		vim.lsp.buf.hover()
+	end, { desc = "Show signature help" })
+end
+
+-- Toggle LSP warnings/errors
+vim.api.nvim_create_user_command("Stfu", function()
+	vim.diagnostic.enable(not vim.diagnostic.is_enabled())
+end, {})
 
 -- Refactoring
 vim.keymap.set("x", "<leader>re", ":Refactor extract ")
@@ -42,10 +56,10 @@ vim.keymap.set("n", "<leader>rbf", ":Refactor extract_block_to_file")
 vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename)
 
 -- Tabs
-vim.keymap.set("n", "<Tab>", ":tabnext<CR>", { silent = true })
+vim.keymap.set("n", "<leader><Tab>", ":tabnext<CR>", { silent = true })
 -- the default <C-i> is broken by remapping Tab for some reason, unless I fix it manually
 vim.keymap.set("n", "<C-i>", "<C-i>", { silent = true, remap = false })
-vim.keymap.set("n", "<S-Tab>", ":tabprevious<CR>", { silent = true })
+vim.keymap.set("n", "<leader><S-Tab>", ":tabprevious<CR>", { silent = true })
 vim.keymap.set("n", "<leader>t", ":tabnew<CR>", { silent = true })
 vim.keymap.set("n", "<C-x>", ":tabclose<CR>", { silent = true })
 vim.keymap.set("n", "tn", ":LualineRenameTab ")
@@ -69,12 +83,8 @@ vim.keymap.set("n", "<Right>", dap.step_into, { desc = "Step in" })
 vim.keymap.set("n", "<Left>", dap.step_out, { desc = "Step out" })
 vim.keymap.set("n", "<Up>", dap.run_to_cursor, { desc = "Run to cursor" })
 
-vim.keymap.set("n", "gt", dapPython.test_method, { desc = "dbg: Run test above cursor" })
-vim.keymap.set("n", "gd", function()
-	-- dapui.close(1)
-	-- dapui.open(2)
-	-- dapui.open(3)
-	-- dap.continue()
+-- vim.keymap.set("n", "gt", dapPython.test_method, { desc = "dbg: Run test above cursor" })
+vim.keymap.set("n", "<leader>gd", function()
 	dapui.close(1)
 	dapui.toggle(2)
 	dapui.toggle(3)
