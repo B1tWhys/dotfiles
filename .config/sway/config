@@ -1,45 +1,17 @@
 #font pango:monospace 8
 
-# This font is widely installed, provides lots of unicode glyphs, right-to-left
-# text rendering and scalability on retina/hidpi displays (thanks to pango).
-#font pango:DejaVu Sans Mono 8
-
-# fix screen layout
-# **Now done in the X11 startup scripts file instead of here.
-#exec --no-startup-id /usr/local/bin/arrangeScreens
-
-# turn off window borders
+# turn off window titlebars
 default_border pixel 2
-
-# set wallpaper
-# exec --no-startup-id setWallpaper
 
 # ssh into server for remote access
 # exec --no-startup-id autossh -M 8022:7 -f -N -T -R8022:localhost:22 skyler@myserver
 
-# start conky
-#exec --no-startup-id conky -c /home/skyler/.config/conky/conkyL.conf
+# Configure swayfx look & feel
+blur enable
+blur_passes 2
+blur_radius 3
 
-# exec compton
-
-# fix mouse sensitivity (now done in ~/.xsession)
-
-# start speedcrunch
-# exec --no-startup-id speedcrunch
-# bindsym $mod+space scratchpad show
-# for_window [class="SpeedCrunch"] resize set 800px 800px, move scratchpad
-
-# put psensor in the scratchpad
-#for_window [class="Psensor"] floating enable resize set 1000px 500px, move position 0 0, move scratchpad
-
-# make peek windows floating
-# for_window [title="peek"] floating enable
-
-# sleep shortcut
-# bindsym $mod+shift+s exec --no-startup-id /usr/local/bin/sleep_to_ram
-
-# start dropbox
-# exec --no-startup-id dropbox &
+corner_radius 10
 
 # start polybar (now done in ~/.xsession)
 # exec --no-startup-id polybar -rq main
@@ -50,7 +22,7 @@ default_border pixel 2
 smart_gaps on
 smart_borders no_gaps
 
-gaps inner 5
+gaps inner 10
 gaps outer 0
 
 # set the mod key
@@ -72,17 +44,17 @@ bindsym control+Next exec --no-startup-id /usr/local/bin/decrementVolume
 # floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec --no-startup-id openTerm
-#bindsym $mod+Return exec kitty -1
+# bindsym $mod+Return exec --no-startup-id openTerm
+bindsym $mod+Return exec kitty -1
 
 # start a browser
-bindsym $mod+Shift+f exec --no-startup-id firefox --no-startup-id
+bindsym $mod+Shift+f exec --no-startup-id librewolf --no-startup-id
 
 # kill focused window
 bindsym $mod+Shift+q kill
 
 # take screenshot
-bindsym Mod1+Shift+4 exec --no-startup-id deepin-screenshot
+# bindsym Mod1+Shift+4 exec --no-startup-id deepin-screenshot
 
 # start dmenu (a program launcher)
 # bindsym $mod+d exec dmenu_run
@@ -127,6 +99,14 @@ bindsym $mod+Shift+space floating toggle
 # change focus between tiling / floating windows
 bindsym $mod+a focus parent
 
+input "type:keyboard" {
+    xkb_options caps:swapescape
+}
+
+input "type:pointer" {
+    pointer_accel -.5
+}
+
 # Define names for default workspaces for which we configure key bindings later on.
 # We use variables to avoid repeating the names in multiple places.
 set $ws1 "1"
@@ -142,30 +122,38 @@ set $ws10 "z"
 set $ws11 "x"
 set $ws12 "c"
 
-# assign workspaces to screens
-workspace 1 output HDMI-1
-workspace 2 output DP-2
-workspace 3 output HDMI-0
-workspace q output HDMI-1
-workspace w output DP-2
-workspace e output HDMI-0
-workspace a output HDMI-1
-workspace s output DP-2
-workspace d output HDMI-0
-workspace z output HDMI-1
-workspace x output DP-2
-workspace c output HDMI-0
+set $l_mon "HDMI-A-1"
+set $m_mon "DP-2"
+set $r_mon "HDMI-A-2"
 
-bindsym $mod+1 focus output HDMI-1
-bindsym $mod+2 focus output DP-2
-bindsym $mod+3 focus output HDMI-0
+output $l_mon pos 0 0 res 1920x1080 bg ~/Wallpaper/purple_mountain.png stretch
+output $m_mon pos 1920 0 res 2560x1440 bg ~/Wallpaper/purple_mountain.png stretch
+output $r_mon pos 4480 0 res 1920x1080 bg ~/Wallpaper/purple_mountain.png stretch
+
+# assign workspaces to screens
+workspace 1 output $l_mon
+workspace 2 output $m_mon
+workspace 3 output $r_mon
+workspace q output $l_mon
+workspace w output $m_mon
+workspace e output $r_mon
+workspace a output $l_mon
+workspace s output $m_mon
+workspace d output $r_mon
+workspace z output $l_mon
+workspace x output $m_mon
+workspace c output $r_mon
+
+bindsym $mod+1 focus output $l_mon
+bindsym $mod+2 focus output $m_mon
+bindsym $mod+3 focus output $r_mon
 
 # reload the configuration file
 bindsym $mod+Shift+c reload
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
 bindsym $mod+Shift+r restart
 # exit i3 (logs you out of your X session)
-bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
+bindsym $mod+Shift+e exec "swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your wayland session.' -b 'Yes, exit sway' 'swaymsg exit'"
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
@@ -187,7 +175,7 @@ mode "resize" {
 }
 
 mode "workspace" {
-    # change focus to a specific workspace but DONT switch back to the default mode
+	# change focus to a specific workspace but DONT switch back to the default mode
 	bindsym $mod+1 workspace $ws1
 	bindsym $mod+2 workspace $ws2
 	bindsym $mod+3 workspace $ws3
@@ -201,7 +189,7 @@ mode "workspace" {
 	bindsym $mod+x workspace $ws11
 	bindsym $mod+c workspace $ws12
 
-    # change focus to a workspace and switch back to the default mode
+	# change focus to a workspace and switch back to the default mode
 	bindsym 1 workspace $ws1; mode "default"
 	bindsym 2 workspace $ws2; mode "default"
 	bindsym 3 workspace $ws3; mode "default"
@@ -215,7 +203,7 @@ mode "workspace" {
 	bindsym x workspace $ws11; mode "default"
 	bindsym c workspace $ws12; mode "default"
 
-    # move window to a workspace and change focus to that workspace
+	# move window to a workspace and change focus to that workspace
 	bindsym Shift+1 move window to workspace $ws1; mode "default"; workspace $ws1
 	bindsym Shift+2 move window to workspace $ws2; mode "default"; workspace $ws2
 	bindsym Shift+3 move window to workspace $ws3; mode "default"; workspace $ws3
@@ -229,7 +217,7 @@ mode "workspace" {
 	bindsym Shift+x move window to workspace $ws11; mode "default"; workspace $ws11
 	bindsym Shift+c move window to workspace $ws12; mode "default"; workspace $ws12
  
-    # move window to a workspace but DON'T change focus to that workspace
+	# move window to a workspace but DON'T change focus to that workspace
 	bindsym Shift+ctrl+1 move window to workspace $ws1; mode "default"
 	bindsym Shift+ctrl+2 move window to workspace $ws2; mode "default"
 	bindsym Shift+ctrl+3 move window to workspace $ws3; mode "default"
@@ -245,15 +233,14 @@ mode "workspace" {
 
 	bindsym Return mode "default"
 	bindsym Escape mode "default"
-	# bindsym $mod+w mode "default"
 }
 
 mode "innert" {
     bindsym Shift+Escape mode "default"
 
-    bindsym $mod+1 focus output HDMI-1
-    bindsym $mod+2 focus output DP-2
-    bindsym $mod+3 focus output HDMI-0
+    bindsym $mod+1 focus output $l_mon
+    bindsym $mod+2 focus output $m_mon
+    bindsym $mod+3 focus output $r_mon
 }
 
 bindsym $mod+r mode "resize"
@@ -266,12 +253,12 @@ mouse_warping output
 # theme
 
 # class                 border  bground text    indicator child_border
-client.focused          #000000 #FFFFFF #000000 #000000   #777777
+client.focused          #000000 #FFFFFF #000000 #000000   #ACA2CD
 client.focused_inactive #333333 #5F676A #FFFFFF #484E50   #5F676A
-client.unfocused        #333333 #222222 #888888 #292D2E   #222222
+client.unfocused        #333333 #222222 #888888 #292D2E   #766C94
 client.urgent           #2F343A #900000 #FFFFFF #900000   #900000
 client.placeholder      #000000 #0C0C0C #FFFFFF #000000   #0C0C0C
-client.background       #FFFFFF
+client.background       #000000
 
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
@@ -282,8 +269,8 @@ client.background       #FFFFFF
 
 
 # TEMP: Fractal window arrangement
-assign [class="Fractal Box"] output HDMI-1
-#assign [class="Fractal Box"] output DP-2
+assign [class="Fractal Box"] output $l_mon
+#assign [class="Fractal Box"] output $m_mon
 for_window [class="Fractal Box"] floating enable
-assign [class="Settings"] output HDMI-1
+assign [class="Settings"] output $l_mon
 for_window [class="Settings"] floating enable
