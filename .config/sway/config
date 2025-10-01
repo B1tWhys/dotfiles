@@ -13,8 +13,8 @@ blur_radius 3
 
 corner_radius 10
 
-# start polybar (now done in ~/.xsession)
-# exec --no-startup-id polybar -rq main
+# start waybar
+exec --no-startup-id waybar
 
 # start unclutter
 # exec --no-startup-id unclutter --timeout 1 &
@@ -37,8 +37,8 @@ set $right l
 
 # Audio control keys
 bindsym control+Break exec --no-startup-id /usr/local/bin/toggleAudio
-bindsym control+Prior exec --no-startup-id /usr/local/bin/incrementVolume
-bindsym control+Next exec --no-startup-id /usr/local/bin/decrementVolume
+bindsym control+Prior exec --no-startup-id "pactl set-sink-volume @DEFAULT_SINK@ +3%"
+bindsym control+Next exec --no-startup-id "pactl set-sink-volume @DEFAULT_SINK@ -3%"
 
 # use Mouse+$mod to drag floating windows to their wanted position
 # floating_modifier $mod
@@ -63,9 +63,9 @@ bindsym $mod+Shift+q kill
 # installed.
 # bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
 
-bindsym --release $mod+d exec --no-startup-id rofi -show run
+bindsym $mod+shift+d exec --no-startup-id wofi --show run
 # bindsym --release $mod+Shift+w exec --no-startup-id rofi -show window
-bindsym --release $mod+Tab exec --no-startup-id rofi -show window
+bindsym --release $mod+Tab exec --no-startup-id wofi --show window
 
 # change focus
 bindsym $mod+$left focus left
@@ -267,6 +267,8 @@ client.background       #000000
 # 	position top
 # }
 
+# Wofi window blur
+layer_effects "wofi" blur enable;
 
 # TEMP: Fractal window arrangement
 assign [class="Fractal Box"] output $l_mon
@@ -274,3 +276,4 @@ assign [class="Fractal Box"] output $l_mon
 for_window [class="Fractal Box"] floating enable
 assign [class="Settings"] output $l_mon
 for_window [class="Settings"] floating enable
+
