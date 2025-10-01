@@ -97,6 +97,12 @@ elif command -v xclip &>/dev/null; then
     alias paste="xclip -o -selection clipboard"
 fi
 
+if command -v zoxide &>/dev/null; then
+    echo "zoxide init"
+    eval "$(zoxide init --cmd cd bash)"
+    alias cd="zoxide"
+fi
+
 export LESS_TERMCAP_mb=$'\e[1;32m'
 export LESS_TERMCAP_md=$'\e[1;32m'
 export LESS_TERMCAP_me=$'\e[0m'
