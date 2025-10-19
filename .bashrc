@@ -70,6 +70,7 @@ alias gpush="git push"
 alias gpul="git pull"
 alias gpull="git pull"
 alias gc="git commit"
+alias gamd="gc -a --amend --no-edit"
 alias ga="git add"
 alias gb="git branch"
 alias gbc="git branch --show-current"
@@ -98,9 +99,8 @@ elif command -v xclip &>/dev/null; then
 fi
 
 if command -v zoxide &>/dev/null; then
-    echo "zoxide init"
     eval "$(zoxide init --cmd cd bash)"
-    alias cd="zoxide"
+    # alias cd="zoxide" # might be necessary on OS X?
 fi
 
 export LESS_TERMCAP_mb=$'\e[1;32m'
