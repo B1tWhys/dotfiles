@@ -125,10 +125,6 @@ if [[ -d "$HOME/.bash_init_scripts" ]]; then
     done
 fi
 
-if [[ -f "$HOME/.cargo/env" ]]; then
-    # shellcheck disable=SC1091
-    . "$HOME/.cargo/env"
-fi
-
 # Created by `pipx` on 2024-07-10 05:22:21
 export PATH="$PATH:/Users/Skyler/.local/bin"
+
