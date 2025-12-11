@@ -43,6 +43,7 @@ for _, c in ipairs({ "i", "n" }) do
 		vim.lsp.buf.hover()
 	end, { desc = "Show signature help" })
 end
+vim.keymap.set("n", "<space>ca", vim.lsp.buf.code_action, { desc = "code actions"})
 
 -- Toggle LSP warnings/errors
 vim.api.nvim_create_user_command("Stfu", function()
