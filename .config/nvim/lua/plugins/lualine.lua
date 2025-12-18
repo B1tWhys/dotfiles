@@ -12,7 +12,7 @@ return {
 					lualine_c = {},
 					lualine_x = { "filetype" },
 					lualine_y = { "progress" },
-					lualine_z = { "location" },
+					lualine_z = { "location", "selectioncount" },
 				},
 				tabline = {
 					lualine_a = {
