@@ -1,3 +1,5 @@
+- **DO NOT USE EMOJI! Ever!**
+
 # Comments and documentation
 - Comments are only necessary to explain the reasoning for why something is being done, or when there's something tricky going on. If something is obvious by reading the code, there's no need to write a comment repeating it in english. Where possible, prefer to use a more verbose/detailed name instead of writing a comment.
 
