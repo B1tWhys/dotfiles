@@ -89,6 +89,13 @@ alias top="htop"
 alias vi="nvim"
 alias imasscan="sudo masscan --rate 8000 -p T:1-65535,U:1-65535"
 alias inmap="nmap -sC -sV -oN nmap.out -T4"
+alias pat="prettybat"
+
+if command -v claude &>/dev/null; then
+    alias ckr="claude"
+elif command -v kiro-cli &>/dev/null; then
+    alias ckr="kiro-cli"
+fi
 
 if command -v pbcopy &>/dev/null; then
     alias clip="pbcopy"
@@ -127,4 +134,3 @@ fi
 
 # Created by `pipx` on 2024-07-10 05:22:21
 export PATH="$PATH:/Users/Skyler/.local/bin"
-
