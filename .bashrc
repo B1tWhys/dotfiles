@@ -4,28 +4,25 @@
 [[ $- != *i* ]] && return
 
 # If there is a default location, cd to it
-defaultLocation='/tmp/defaultTerminalLocation'
-if [ -s $defaultLocation ]; then
-    if [ -d "$(cat $defaultLocation)" ]; then
-        cd "$(cat $defaultLocation)" || return
+defaultLocation="$HOME/defaultTerminalLocation"
+if [ -s "$defaultLocation" ]; then
+    if [ -d "$(cat "$defaultLocation")" ]; then
+        cd "$(cat "$defaultLocation")" || return
     fi
 fi
 
-alias dtd="pwd > /tmp/defaultTerminalLocation"
+# shellcheck disable=SC2139
+alias dtd="pwd > $defaultLocation"
 g() {
     if [ -s "$defaultLocation" ]; then
         if [ -d "$(cat "$defaultLocation")" ]; then
-            cd "$(cat /tmp/defaultTerminalLocation)" || return
+            cd "$(cat $defaultLocation)" || return
         fi
     fi
 }
 
 # shellcheck disable=SC2025
-if [ "$(whoami)" == 'root' ]; then
-    PS1="\e[95m!\! \e[32m[\T] \e[91m$(whoami)\e[36m@\h \e[31m\w\e[39m\n# "
-else
-    PS1="\e[95m!\! \e[32m[\T] \e[36m$(whoami)@\h \e[31m\w\e[39m\n# "
-fi
+PS1="\e[95m!\! \e[32m[\T] \e[36m$(whoami)@\h \e[31m\w\e[39m\n# "
 
 set -o vi
 shopt -s cdspell
@@ -80,7 +77,7 @@ alias glo="git log --oneline --graph"
 alias gla="git log --graph --all"
 alias gloa="git log --oneline --graph --all"
 alias glav="git log --graph --all"
-alias gwatch='watch -n .5 -c "git log --oneline --all --graph --decorate=short --color=always"'
+alias gwatch='watch -t -n .5 -c "git log --oneline --all --graph --decorate=short --color=always"'
 alias gsta="git stash"
 alias sctl="sudo systemctl"
 alias jctl="sudo journalctl"
@@ -131,6 +128,3 @@ if [[ -d "$HOME/.bash_init_scripts" ]]; then
         source "$f"
     done
 fi
-
-# Created by `pipx` on 2024-07-10 05:22:21
-export PATH="$PATH:/Users/Skyler/.local/bin"
