@@ -87,6 +87,11 @@ alias vi="nvim"
 alias imasscan="sudo masscan --rate 8000 -p T:1-65535,U:1-65535"
 alias inmap="nmap -sC -sV -oN nmap.out -T4"
 alias pat="prettybat"
+alias cg="cargo"
+alias cgr="cargo r"
+alias cgrr="cargo r --release"
+alias cgb="cargo b"
+alias cgbr="cargo b --release"
 
 if command -v claude &>/dev/null; then
     alias ckr="claude"
