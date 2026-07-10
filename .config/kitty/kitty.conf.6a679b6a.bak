@@ -4,4 +4,3 @@ cursor_blink_interval 0
 confirm_os_window_close 0
 window_padding_width 0 0 0 5
 enable_audio_bell disabled
-map shift+enter send_text all \e\r
