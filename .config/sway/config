@@ -1,10 +1,13 @@
 #font pango:monospace 8
 
+include /etc/sway/config.d/*
+
 # turn off window titlebars
 default_border pixel 2
 
 # ssh into server for remote access
 # exec --no-startup-id autossh -M 8022:7 -f -N -T -R8022:localhost:22 skyler@myserver
+exec --no-startup-id /usr/lib/xdg-desktop-portal -r
 
 # Configure swayfx look & feel
 blur enable
@@ -266,9 +269,6 @@ client.background       #000000
 #         status_command i3status
 # 	position top
 # }
-
-# Wofi window blur
-layer_effects "wofi" blur enable;
 
 # TEMP: Fractal window arrangement
 assign [class="Fractal Box"] output $l_mon
